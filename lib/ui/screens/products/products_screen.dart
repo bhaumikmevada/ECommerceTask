@@ -31,6 +31,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   }
 
+
   @override
   Widget build(BuildContext context) {
     context.read<ProductCubit>().productCategoryWise(PreferenceUtils.getString(ConstantsUtils.PRODUCT_ID));
@@ -49,9 +50,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           }
           else if(state is ProductResponseState){
 
-            setState(() {
-              model = state.model;
-            });
+            model = state.model;
 
             debugPrint("product response state : ${model}");
 
@@ -60,7 +59,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           else if(state is ProductErrorState){
 
           }
-          return   Container(
+          return model == null ? Center(child: CircularProgressIndicator(),) : Container(
             margin: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

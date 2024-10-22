@@ -64,7 +64,7 @@ class ApiService{
     debugPrint("product Response api : ${response.data}");
 
     ProductModel model = ProductModel.fromJson(response.data);
-
+    debugPrint("product Response model : ${model}");
     return model;
   }
 

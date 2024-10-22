@@ -17,7 +17,7 @@ class ProductCubit extends Cubit<ProductState>{
 
     try{
       dynamic model = await apiService.productCategoryWise(id);
-      debugPrint("cubit category : $model");
+      debugPrint("cubit productcategory : $model");
       emit(ProductResponseState(model));
 
     }catch(e){
