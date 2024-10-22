@@ -1,4 +1,6 @@
 import 'package:ecommerce_task/ui/screens/products/cubit/product_state.dart';
+import 'package:ecommerce_task/ui/utils/ConstantsUtils.dart';
+import 'package:ecommerce_task/ui/utils/PrefernceUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,18 +27,18 @@ class _ProductsScreenState extends State<ProductsScreen> {
   void initState() {
     super.initState();
 
-    debugPrint("widget params : ${widget.params}");
+    debugPrint("product id : ${PreferenceUtils.getString(ConstantsUtils.PRODUCT_ID)}");
 
   }
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProductCubit>().productCategoryWise("1");
+    context.read<ProductCubit>().productCategoryWise(PreferenceUtils.getString(ConstantsUtils.PRODUCT_ID));
 
     return Scaffold(
         appBar: AppBar(
           backgroundColor: ColorUtils.colorBlack,
-          title: AppText.TextAppBar(AppString.categoryTitle),
+          title: AppText.TextAppBar(AppString.productDetailTitle),
 
         ),
       body: BlocBuilder<ProductCubit,ProductState>(
@@ -47,23 +49,24 @@ class _ProductsScreenState extends State<ProductsScreen> {
           }
           else if(state is ProductResponseState){
 
-            model = state.model;
+            setState(() {
+              model = state.model;
+            });
 
-            debugPrint("product response state : ${model!.image}");
+            debugPrint("product response state : ${model}");
 
 
           }
           else if(state is ProductErrorState){
 
           }
-          return  Container(
+          return   Container(
             margin: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
 
               children: [
 
-                
                 "${model?.image}" != "" ?
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),

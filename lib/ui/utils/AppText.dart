@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class AppText{
 
   static Widget TextRegular(String message,double fontSize,Color textColor){
-    return Text(message,style: TextStyle(fontSize: fontSize,fontWeight: FontWeight.w400,color: textColor),);
+    return Text(message,style: TextStyle(fontSize: fontSize,fontWeight: FontWeight.w400,color: textColor,
+    ),maxLines: 1,);
   }
 
   static Widget TextMedium(String message,double fontSize,Color textColor){

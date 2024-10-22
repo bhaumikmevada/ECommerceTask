@@ -8,6 +8,8 @@ import 'package:ecommerce_task/cubits/internet_state.dart';
 import 'package:ecommerce_task/routes/RouteApp.dart';
 import 'package:ecommerce_task/ui/screens/categories/cubit/category_cubit.dart';
 import 'package:ecommerce_task/ui/screens/categories/cubit/category_state.dart';
+import 'package:ecommerce_task/ui/utils/ConstantsUtils.dart';
+import 'package:ecommerce_task/ui/utils/PrefernceUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -82,9 +84,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 return GestureDetector(
                   onTap: (){
 
-                    Navigator.of(context).pushNamed(productScreenRoute,arguments: {
-                      "id":categoryList[index]
-                    });
+                    PreferenceUtils.setString(ConstantsUtils.CAT_NAME, "${categoryList[index]}");
+                    Navigator.of(context).pushNamed(categoryProductScreenRoute);
 
                   },
                   child: Container(

@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:ecommerce_task/ui/screens/products/model/CategoryProductModel.dart';
 import 'package:ecommerce_task/ui/utils/ConstantsUtils.dart';
 import 'package:flutter/widgets.dart';
 
@@ -42,14 +43,31 @@ class ApiService{
     return list;
   }
 
-  Future<ProductModel?> productCategoryWise(String id) async {
+  Future<List<CategoryProductModel>?> categoryProductList(String category) async {
+
+    var response = await dio.get("${ConstantsUtils.productCategoryUrl}/$category");
+
+    debugPrint("CategoryProductList Response api : ${response}");
+
+    List<dynamic> data = response.data;
+
+    List<CategoryProductModel> model = data.map((e) => CategoryProductModel.fromJson(e)).toList();
+
+    return model;
+  }
+
+
+  Future<ProductModel> productCategoryWise(String id) async {
 
     var response = await dio.get("${ConstantsUtils.productUrl}/$id");
 
-    debugPrint("product Response api : ${response}");
+    debugPrint("product Response api : ${response.data}");
 
     ProductModel model = ProductModel.fromJson(response.data);
 
     return model;
   }
+
+
+
 }
